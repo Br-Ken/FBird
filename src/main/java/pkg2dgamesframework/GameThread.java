@@ -1,27 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pkg2dgamesframework;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
 
-/**
- *
- * @author phamn
- */
 public class GameThread extends JPanel implements Runnable{
     
     private GameScreen context;
     
     private Thread thread;
-    
-    private Graphics ThisGraphics;
     
     public static int FPS = 70;
     

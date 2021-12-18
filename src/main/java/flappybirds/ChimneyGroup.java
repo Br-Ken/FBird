@@ -29,28 +29,22 @@ public class ChimneyGroup {
         Random random = new Random();
         int a;
         a = random.nextInt(10); //10 cap do
-
         return a*30;
     }
+
     public ChimneyGroup() {
         try {
-
             chimneyImage = ImageIO.read( new File("src/main/resources/Assests/chimney.png"));
             chimneyImage2 = ImageIO.read( new File("src/main/resources/Assests/chimney_.png"));
-
         } catch (IOException ex) {}
 
         chimneys = new QueueList<Chimney>();
-
         Chimney cn ;
 
         for (int i = 0; i < SIZE/2; i++) {
-
             int deltaY = getRandomY();
-
             cn = new Chimney(830 + i*300, bottomChimneyY + deltaY, 74, 400);
             chimneys.push(cn);
-
             cn = new Chimney(830 + i*300, topChimneyY + deltaY, 74, 400);
             chimneys.push(cn);
         }
@@ -58,16 +52,12 @@ public class ChimneyGroup {
 
     public void resetChimneys() {
         chimneys = new QueueList<Chimney>();
-
         Chimney cn ;
 
         for (int i = 0; i < SIZE/2; i++) {
-
             int deltaY = getRandomY();
-
             cn = new Chimney(830 + i*300, bottomChimneyY + deltaY, 74, 400);
             chimneys.push(cn);
-
             cn = new Chimney(830 + i*300, topChimneyY + deltaY, 74, 400);
             chimneys.push(cn);
         }
@@ -79,9 +69,9 @@ public class ChimneyGroup {
         }
 
         if(chimneys.get(0).getPosX() < -74) {
-
             int deltaY = getRandomY();
             Chimney cn;
+
             cn = chimneys.pop();
             cn.setPosX(chimneys.get(4).getPosX() + 300);
             cn.setPosY(bottomChimneyY + deltaY);

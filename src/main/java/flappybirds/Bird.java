@@ -29,11 +29,9 @@ public class Bird extends Objects {
     public  Bird(int x, int y, int w, int h) {
         super(x, y, w , h);
         rect = new Rectangle(x, y, w , h);
-
         flapSound = new SoundPlayer(new File("src/main/resources/Assests/fap.wav"));
         bupSound = new SoundPlayer(new File("src/main/resources/Assests/fall.wav"));
         getMoneySound = new SoundPlayer(new File("src/main/resources/Assests/getpoint.wav"));
-
     }
 
     public Rectangle getRect() {
@@ -45,12 +43,9 @@ public class Bird extends Objects {
     }
 
     public void update(long deltaTime) {
-
         vt += FlappyBirds.g;
-
         this.setPosY(this.getPosY() + vt); //vi tri len xuoong
         this.rect.setLocation((int)this.getPosX(),(int) this.getPosY());
-
         if(vt<0) isFlying = true; //neu dang bay
         else isFlying = false; //ngc lai
     }

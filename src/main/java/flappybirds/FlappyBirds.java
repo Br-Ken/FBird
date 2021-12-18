@@ -22,22 +22,19 @@ public class FlappyBirds extends GameScreen {
     private Ground ground;
 
     private  ChimneyGroup chimneyGroup;
-
     private int Point = 0;
+    private int Best_Point = 0;
 
     private int BEGIN_SCREEN = 0;
     private int GAMEPLAY_SCREEN = 1;
     private int GAMEOVER_SCREEN = 2;
 
     private int CurrentScreen = BEGIN_SCREEN;
-
+    private BufferedImage title, bg;
     public FlappyBirds() {
         super(800, 600);
-
         try {
-
             birds = ImageIO.read(new File("src/main/resources/Assests/bird_sprite.png"));
-
         } catch (IOException ex) {}
 
         bird_anim = new Animation(70);
@@ -78,7 +75,6 @@ public class FlappyBirds extends GameScreen {
             if(bird.getLive()) bird_anim.Update_Me(deltaTime);
             bird.update(deltaTime);
             ground.Update();
-
             chimneyGroup.update();
 
             for (int i = 0; i < ChimneyGroup.SIZE; i++) {
@@ -105,12 +101,14 @@ public class FlappyBirds extends GameScreen {
     }
 
     @Override
-    public void GAME_PAINT(Graphics2D g2) {
-
+    public void GAME_PAINT(Graphics2D g2) throws IOException {
+        title = ImageIO.read(new File("src/main/resources/Assests/title.png"));
+        bg = ImageIO.read(new File("src/main/resources/Assests/bg.png"));
         g2.setColor(Color.decode("#b8daef"));
         g2.fillRect(0, 0,  MASTER_WIDTH, MASTER_HEIGHT); //MASTER_ not CUSTOM_ de fill kick co cua so
+        g2.drawImage(bg,0,0,null);
+        //g2.drawImage(title,0,0,null);
         chimneyGroup.paint(g2);
-
         ground.Paint(g2);
 
         if (bird.getIsFlying()) {
@@ -118,16 +116,30 @@ public class FlappyBirds extends GameScreen {
         } else bird_anim.PaintAnims((int) bird.getPosX(), (int) bird.getPosY(), birds, g2, 0, 0);
 
         if (CurrentScreen == BEGIN_SCREEN) {
+
             g2.setColor(Color.red);
-            g2.drawString("Press space to play game", 200, 300);
+            g2.setFont(new Font("SansSerif",Font.BOLD,20));
+            g2.drawString("Press space to play game", 270, 400);
         }
-        if (CurrentScreen == GAMEOVER_SCREEN) {
+        else if (CurrentScreen == GAMEOVER_SCREEN) {
+            g2.setColor(Color.WHITE);
+            g2.setFont(new Font("SansSerif",Font.BOLD,50));
+            g2.drawString("GAME OVER",250,200);
+            g2.setFont(new Font("SansSerif",Font.BOLD,30));
+            g2.drawString("Press space turn back begin screen", 150, 560);
             g2.setColor(Color.red);
-            g2.drawString("Press space turn back begin screen", 200, 300);
+            g2.setFont(new Font("SansSerif",Font.BOLD,30));
+            if (Point > Best_Point){
+                Best_Point = Point;
+            }
+            g2.drawString("Best Point: " + Best_Point, 320 , 250);
+        }
+        else {
+            g2.setColor(Color.red);
+            g2.setFont(new Font("SansSerif",Font.BOLD,12));
+            g2.drawString("Point: " + Point, 20, 30);
         }
 
-        g2.setColor(Color.red);
-        g2.drawString("Point: " + Point, 20, 30);
     }
 
     @Override

@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pkg2dgamesframework;
 
-import java.io.File;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.File;
 
-/**
- *
- * @author phamn
- */
 public class SoundPlayer {
     
     private Clip clip;
@@ -47,9 +38,5 @@ public class SoundPlayer {
     }
     public void stop(){
         if(clip.isRunning()) clip.stop();
-    }
-    
-    public void close(){
-        clip.close();
     }
 }

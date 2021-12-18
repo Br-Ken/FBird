@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pkg2dgamesframework;
 
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import javax.swing.JFrame;
+import java.io.IOException;
 
-/**
- *
- * @author phamn
- */
 public abstract class GameScreen extends JFrame implements KeyListener{
 
     public static int KEY_PRESSED = 0;
@@ -26,20 +17,7 @@ public abstract class GameScreen extends JFrame implements KeyListener{
     private GameThread G_Thread;
     
     public static int MASTER_WIDTH = 500, MASTER_HEIGHT = 500;
-    
-    public GameScreen(){
-        InitThread();
-        InitScreen();
-    }
-    
-    public void RegisterImage(int id, BufferedImage image){
-        
-    }
-    
-    public BufferedImage getImageWithID(int id){
-        return null;
-    }
-    
+
     public GameScreen(int w, int h){
         this.CUSTOM_WIDTH = w;
         this.CUSTOM_HEIGHT = h;
@@ -50,12 +28,10 @@ public abstract class GameScreen extends JFrame implements KeyListener{
     }
     
     private void InitScreen(){
-        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.addKeyListener(this);
         setSize(CUSTOM_WIDTH, CUSTOM_HEIGHT);
         setVisible(true);
-        
     }
     
     public void BeginGame(){
@@ -81,7 +57,9 @@ public abstract class GameScreen extends JFrame implements KeyListener{
     }
     
     public abstract void GAME_UPDATE(long deltaTime);
-    public abstract void GAME_PAINT(Graphics2D g2);
+
+    public abstract void GAME_PAINT(Graphics2D g2) throws IOException;
+
     public abstract void KEY_ACTION(KeyEvent e, int Event);
     
 }
